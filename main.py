@@ -22,3 +22,6 @@ def upload_repo():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 
+
+upload_to_s3('app.log', bucket_name)
+ # Insert at line: 22
