@@ -1,27 +1,29 @@
-import flask
-from services.clone_service import clone_repository
-from services.upload_service import upload_to_s3
+def sort_list_ascending(input_list):
+    """
+    Sorts a list in ascending order.
 
-app = flask.Flask(__name__)
+    :param input_list: List of elements to be sorted.
+    :return: Sorted list in ascending order.
+    """
+    return sorted(input_list)
 
-@app.route("/clone", methods=["POST"])
-def clone_repo():
-    request_data = flask.request.get_json()
-    repo_url = request_data['repo_url']
-    local_path = clone_repository(repo_url)
-    return {"local_path": local_path}, 200
+def sort_list_descending(input_list):
+    """
+    Sorts a list in descending order.
 
-@app.route("/upload", methods=["POST"])
-def upload_repo():
-    request_data = flask.request.get_json()
-    local_path = request_data['local_path']
-    bucket_name = request_data['bucket_name']
-    upload_to_s3(local_path, bucket_name)
-    return {"status": "successfully uploaded"}, 200
+    :param input_list: List of elements to be sorted.
+    :return: Sorted list in descending order.
+    """
+    return sorted(input_list, reverse=True)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    # Example list
+    example_list = [34, 2, 23, 67, 100, 88, 5]
 
+    # Sorting the list in ascending order
+    sorted_list_ascending = sort_list_ascending(example_list)
+    print("Sorted list in ascending order:", sorted_list_ascending)
 
-upload_to_s3('app.log', bucket_name)
- # Insert at line: 22
+    # Sorting the list in descending order
+    sorted_list_descending = sort_list_descending(example_list)
+    print("Sorted list in descending order:", sorted_list_descending)
